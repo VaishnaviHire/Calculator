@@ -6,8 +6,8 @@ defmodule CalcTest do
     assert Calc.eval("5+2") == 7
   end
   
-   test "Single Bracket" do
-    assert Calc.eval("2+3 * (5+7) - 10") == 28
+   test "Negative values" do
+    assert Calc.eval("3 + 5 /10-12*2") == -21
    end
 
    test "nested brackets" do
