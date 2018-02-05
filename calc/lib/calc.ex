@@ -17,7 +17,7 @@ defmodule Calc do
 
 
 # Function takes a string input and parse it into list of integers and string
-  def parser(str) do
+  defp parser(str) do
         str
         |>String.split(~r/()[\+|)|\(|\-|\*|\/|^|!|]()/,
                 trim: true, include_captures: true)
@@ -37,18 +37,18 @@ defmodule Calc do
 
 # Function returns a tuple with last element and list after elimination of that 
 # element from a the given list
- def pop(list) do
+ defp pop(list) do
  	List.pop_at(list, -1)
  end
 
 # Function returns the list after addition of the given element at the end
- def push(list, element) do
+ defp push(list, element) do
  	List.insert_at(list, -1, element)
  end
 
 # Function returns an integer after evaluating the given list using values and 
 # operands stack.
- def calculate(list,values, operands) do
+ defp calculate(list,values, operands) do
  	
  	{curr,list} = List.pop_at(list,0)
    	cond do
@@ -74,7 +74,7 @@ defmodule Calc do
  end
 
 # Helper function to evaluate expression in brackets
- def brackets_eval(operands1, values1) do
+ defp brackets_eval(operands1, values1) do
 
 	cond do
 
@@ -90,7 +90,7 @@ defmodule Calc do
  end
 
 # Helper function to evaluate numbers using given operator
- def operate(num1, num2, opr) do
+ defp operate(num1, num2, opr) do
  	cond do
 
    	opr == "+" -> num1 + num2
@@ -106,7 +106,7 @@ defmodule Calc do
  end
 
 #Helper function to handle operands stack after the given string is traversed
- def check_empty(operands1, values1) do
+ defp check_empty(operands1, values1) do
 	cond do
 	operands1 != [] -> {val2, values1} = pop(values1)
                            {val1, values1} = pop(values1)
@@ -120,7 +120,7 @@ defmodule Calc do
  end
 
 # Helper function to determine precedence values of the operations
- def precedence(op1, op2) do
+ defp precedence(op1, op2) do
 	cond do
 
 	op2 == "(" or op2 == ")" -> false
@@ -131,7 +131,7 @@ defmodule Calc do
  end
 
 # Helper function to evaluate expression using their precedence values
- def precedence_eval(currelem,operands1, values1) do
+ defp precedence_eval(currelem,operands1, values1) do
 	cond do
 	operands1 != []  and precedence(currelem, List.last(operands1))==true
 		-> {op, operands1} = pop(operands1)
